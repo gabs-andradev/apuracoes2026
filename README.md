@@ -12,3 +12,7 @@ Abra http://localhost:3000. Requer Node 18+ (sem dependências).
 - O servidor busca no TSE a cada 10 s (Brasil + 27 UFs + exterior); o navegador consulta o servidor a cada 5 s.
 - Mapa: vermelho = Lula na frente, azul = Flávio na frente; o tom fica mais forte conforme a vantagem cresce.
 - Outra eleição: `ELEICAO=6258 CICLO=ele2026 node server.js` (códigos em `/oficial/comum/config/ele-c.json`).
+
+---
+
+Feito por [Gabriel Andrade](https://gabandrade.dev).
