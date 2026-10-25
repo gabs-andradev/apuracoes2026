@@ -63,6 +63,18 @@ async function atualizar() {
   }
 }
 
+// Em ambiente serverless (Vercel) o loop não sobrevive entre requisições,
+// então a própria requisição busca no TSE quando o cache está vencido.
+let emAndamento = null;
+function garantirAtual() {
+  const idade = cache.buscadoEm ? Date.now() - Date.parse(cache.buscadoEm) : Infinity;
+  if (cache.ok && idade < REFRESH_MS) return Promise.resolve();
+  emAndamento ||= atualizar()
+    .catch(e => { cache = { ...cache, erro: String(e.message || e) }; })
+    .finally(() => { emAndamento = null; });
+  return emAndamento;
+}
+
 async function loop() {
   try { await atualizar(); } catch (e) { console.error(e); }
   setTimeout(loop, REFRESH_MS);
@@ -72,9 +84,10 @@ const TIPOS = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
   '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.geojson': 'application/json', '.svg': 'image/svg+xml' };
 const PUB = path.join(__dirname, 'public');
 
-http.createServer((req, res) => {
+http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x');
   if (url.pathname === '/api/resultados') {
+    await garantirAtual();
     res.writeHead(200, { 'content-type': 'application/json', 'cache-control': 'no-store' });
     return res.end(JSON.stringify(cache));
   }
