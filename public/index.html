@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apuração 2º Turno · Presidente 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="titulo">
+      <span class="ao-vivo"><i></i>AO VIVO</span>
+      <h1>Eleição Presidencial 2026 · 2º Turno</h1>
+    </div>
+    <div class="status">
+      <span id="atualizado">Carregando…</span>
+      <span id="contador" class="contador"></span>
+    </div>
+  </header>
+
+  <section class="placar">
+    <div class="cand lula" data-n="13">
+      <div class="cand-num">13</div>
+      <div class="cand-info">
+        <div class="cand-nome">LULA <small>PT</small></div>
+        <div class="cand-pct"><span class="pct">–</span>%</div>
+        <div class="cand-votos"><span class="votos">–</span> votos</div>
+      </div>
+      <div class="selo-eleito" hidden>ELEITO</div>
+    </div>
+
+    <div class="centro">
+      <div class="urnas-label">Seções apuradas</div>
+      <div class="urnas-pct"><span id="urnas-pct">–</span>%</div>
+      <div class="barra-urnas"><div id="barra-urnas"></div></div>
+      <div class="urnas-abs"><span id="urnas-st">–</span> de <span id="urnas-ts">–</span></div>
+    </div>
+
+    <div class="cand bolso" data-n="22">
+      <div class="cand-info direita">
+        <div class="cand-nome"><small>PL</small> FLÁVIO BOLSONARO</div>
+        <div class="cand-pct"><span class="pct">–</span>%</div>
+        <div class="cand-votos"><span class="votos">–</span> votos</div>
+      </div>
+      <div class="cand-num">22</div>
+      <div class="selo-eleito" hidden>ELEITO</div>
+    </div>
+  </section>
+
+  <section class="disputa">
+    <div class="barra-disputa">
+      <div class="seg lula" id="seg-lula"></div>
+      <div class="seg bolso" id="seg-bolso"></div>
+      <div class="meio"></div>
+    </div>
+    <div class="diferenca" id="diferenca"></div>
+  </section>
+
+  <main class="grade">
+    <section class="cartao mapa-cartao">
+      <div class="cartao-topo">
+        <h2>Quem lidera em cada estado</h2>
+        <div class="legenda">
+          <span><i class="sw" style="background:var(--lula)"></i>Lula</span>
+          <span><i class="sw" style="background:var(--bolso)"></i>Flávio</span>
+          <span><i class="sw" style="background:var(--vazio)"></i>Sem apuração</span>
+          <span class="legenda-nota">tom mais forte = vantagem maior</span>
+        </div>
+      </div>
+      <div id="mapa"></div>
+      <div class="placar-estados">
+        <div><b id="n-lula">0</b> estados com Lula na frente</div>
+        <div><b id="n-bolso">0</b> estados com Flávio na frente</div>
+      </div>
+    </section>
+
+    <aside class="lateral">
+      <section class="cartao">
+        <h2>Comparecimento</h2>
+        <dl class="numeros">
+          <div><dt>Eleitorado</dt><dd id="eleitorado">–</dd></div>
+          <div><dt>Comparecimento</dt><dd id="comparecimento">–</dd></div>
+          <div><dt>Abstenção</dt><dd id="abstencao">–</dd></div>
+          <div><dt>Votos válidos</dt><dd id="validos">–</dd></div>
+          <div><dt>Brancos</dt><dd id="brancos">–</dd></div>
+          <div><dt>Nulos</dt><dd id="nulos">–</dd></div>
+        </dl>
+      </section>
+
+      <section class="cartao tabela-cartao">
+        <h2>Por estado</h2>
+        <div class="tabela-wrap">
+          <table>
+            <thead><tr><th>UF</th><th>Apurado</th><th class="r">Lula</th><th class="r">Flávio</th></tr></thead>
+            <tbody id="tabela"></tbody>
+          </table>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <div id="tooltip" class="tooltip" hidden></div>
+  <div id="erro" class="erro" hidden></div>
+
+  <footer>Fonte: Tribunal Superior Eleitoral (resultados.tse.jus.br) · dados atualizados automaticamente</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

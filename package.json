@@ -1,0 +1,7 @@
+{
+  "name": "apuracao-2turno-2026",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Painel ao vivo da apuração do 2º turno presidencial 2026 (dados do TSE)",
+  "scripts": { "start": "node server.js" }
+}
